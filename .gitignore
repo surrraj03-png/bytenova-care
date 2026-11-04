@@ -1,0 +1,29 @@
+# ByteNova Care – .gitignore
+
+# Local Database Configuration (Contains sensitive local credentials)
+db.local.properties
+*.local.properties
+config/local.properties
+
+# Build output
+target/
+*.war
+*.jar
+*.class
+
+# Maven & Tools
+.m2/
+tools/
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+
+# Logs
+*.log
+catalina.*
+src/main/resources/db.properties

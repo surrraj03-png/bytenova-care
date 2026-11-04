@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+                             https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+
+    <display-name>ByteNova Care – Healthcare Management System</display-name>
+    <description>University Hackathon Project by Team ByteNova</description>
+
+    <!-- Welcome File List -->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <!-- Session Configuration -->
+    <session-config>
+        <session-timeout>30</session-timeout>
+        <cookie-config>
+            <http-only>true</http-only>
+            <secure>false</secure>
+        </cookie-config>
+    </session-config>
+
+    <!-- UTF-8 Encoding Filter -->
+    <filter>
+        <filter-name>EncodingFilter</filter-name>
+        <filter-class>com.bytenova.care.filter.EncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>EncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- Authentication and Role Security Filter -->
+    <filter>
+        <filter-name>AuthenticationFilter</filter-name>
+        <filter-class>com.bytenova.care.filter.AuthenticationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/patient/*</url-pattern>
+        <url-pattern>/doctor/*</url-pattern>
+        <url-pattern>/admin/*</url-pattern>
+    </filter-mapping>
+
+    <!-- Home Servlet -->
+    <servlet>
+        <servlet-name>HomeServlet</servlet-name>
+        <servlet-class>com.bytenova.care.servlet.HomeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HomeServlet</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+
+    <!-- Authentication Servlet -->
+    <servlet>
+        <servlet-name>AuthServlet</servlet-name>
+        <servlet-class>com.bytenova.care.servlet.AuthServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AuthServlet</servlet-name>
+        <url-pattern>/auth</url-pattern>
+        <url-pattern>/login-action</url-pattern>
+        <url-pattern>/register-action</url-pattern>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <!-- Patient Servlet -->
+    <servlet>
+        <servlet-name>PatientServlet</servlet-name>
+        <servlet-class>com.bytenova.care.servlet.PatientServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PatientServlet</servlet-name>
+        <url-pattern>/patient/dashboard</url-pattern>
+        <url-pattern>/patient/book-appointment</url-pattern>
+    </servlet-mapping>
+
+    <!-- Doctor Servlet -->
+    <servlet>
+        <servlet-name>DoctorServlet</servlet-name>
+        <servlet-class>com.bytenova.care.servlet.DoctorServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DoctorServlet</servlet-name>
+        <url-pattern>/doctor/dashboard</url-pattern>
+        <url-pattern>/doctor/update-status</url-pattern>
+    </servlet-mapping>
+
+    <!-- Admin Servlet -->
+    <servlet>
+        <servlet-name>AdminServlet</servlet-name>
+        <servlet-class>com.bytenova.care.servlet.AdminServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminServlet</servlet-name>
+        <url-pattern>/admin/dashboard</url-pattern>
+        <url-pattern>/admin/manage-doctors</url-pattern>
+    </servlet-mapping>
+
+</web-app>
